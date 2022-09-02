@@ -72,14 +72,36 @@ namespace Infosys.QuickKartDBFirst.ConsoleUI
 
             #region Get a Product by Product ID
 
-            var product = repository.GetProductById("P500");
-            if (product != null)
+            //var product = repository.GetProductById("P500");
+            //if (product != null)
+            //{
+            //    Console.WriteLine($"Product ID :{product.ProductId}\nProduct Name :{product.ProductName}\nPrice :{product.Price}\nQuantity Available :{product.QuantityAvailable}");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("No Product");
+            //}
+
+            #endregion
+
+            #region Filter Product By Pattern
+
+            Console.Write("Enter Pattern to search product name :");
+            string pattern = Console.ReadLine();
+            var products = repository.FilterProductByPattern(pattern);
+
+            if (products.Count > 0)
             {
-                Console.WriteLine($"Product ID :{product.ProductId}\nProduct Name :{product.ProductName}\nPrice :{product.Price}\nQuantity Available :{product.QuantityAvailable}");
+                Console.WriteLine($"{"Product Id",-10}\t{"Product Name",-50}\t{"Category Id",-10}\t{"Price"}");
+                Console.WriteLine("---------------------------------------------------------------------------------------------");
+                foreach (var prd in products)
+                {
+                    Console.WriteLine($"{prd.ProductId,-10}\t{prd.ProductName,-50}\t{prd.CategoryId,-10}\t{prd.Price}");
+                }
             }
             else
             {
-                Console.WriteLine("No Product");
+                Console.WriteLine("No Record found.");
             }
 
             #endregion

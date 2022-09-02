@@ -1,4 +1,5 @@
 ﻿using Infosys.QuickKartDBFirst.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,6 +73,22 @@ namespace Infosys.QuickKartDBFirst.DAL
                 throw ex;
             }
             return product;
+        }
+
+        public List<Products> FilterProductByPattern(string pattern)
+        {
+            List<Products> products = null;
+            try
+            {
+                products = _dbContext.Products
+                           .Where(p => EF.Functions.Like(p.ProductName, pattern))
+                           .ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return products;
         }
     }
 
