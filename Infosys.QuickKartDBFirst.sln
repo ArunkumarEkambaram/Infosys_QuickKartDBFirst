@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32802.440
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infosys.QuickKartDBFirst.DAL", "Infosys.QuickKartDBFirst.DAL\Infosys.QuickKartDBFirst.DAL.csproj", "{79BE1CC9-4A49-4CD2-A6B4-BC6D32708904}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infosys.QuickKartDBFirst.ConsoleUI", "Infosys.QuickKartDBFirst.ConsoleUI\Infosys.QuickKartDBFirst.ConsoleUI.csproj", "{23DDD399-ED6F-4E11-B3C3-925E201E3205}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79BE1CC9-4A49-4CD2-A6B4-BC6D32708904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79BE1CC9-4A49-4CD2-A6B4-BC6D32708904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79BE1CC9-4A49-4CD2-A6B4-BC6D32708904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79BE1CC9-4A49-4CD2-A6B4-BC6D32708904}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23DDD399-ED6F-4E11-B3C3-925E201E3205}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23DDD399-ED6F-4E11-B3C3-925E201E3205}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23DDD399-ED6F-4E11-B3C3-925E201E3205}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23DDD399-ED6F-4E11-B3C3-925E201E3205}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2DA6ED71-5A02-4B1D-9BB8-9FD61255047D}
+	EndGlobalSection
+EndGlobal
