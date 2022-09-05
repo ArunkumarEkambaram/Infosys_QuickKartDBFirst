@@ -261,7 +261,8 @@ namespace Infosys.QuickKartDBFirst.DAL
         {
             //FromSqlRaw = Works with "Select" statement only
             SqlParameter sqlCategoryId = new SqlParameter("@CategoryId", categoryId);
-            return _dbContext.Products.FromSqlRaw("Select * from Products Where CategoryId=@CategoryId", sqlCategoryId)
+            return _dbContext.Products.FromSqlRaw("Select ProductName, Price, CategoryName, QuantityAvailable from Products a join Categories b on a.CategoryId = b.CategoryId " +
+                                                  "Where b.CategoryId = @CategoryId", sqlCategoryId)
                                               .OrderBy(p => p.Price)
                                               .ToList();
 

@@ -1,0 +1,37 @@
+﻿--Add new row
+Add()
+SaveChanges() - add the values from Object to Database
+
+--Update existing row
+Update()
+SaveChanges()
+Update Product SET Price=12, Quantity=12 Where ProductId=1
+
+Select * from Table Where ID=1
+--Remove existing row
+Remove()
+SaveChanges()
+
+EntityState.Added, Modified, Deleted, Detached, UnChanged
+
+CRUD - Create, Read, Update, Delete
+
+ProductName LIKE '%a%'
+
+Child = Parent oBject //error
+
+Parent = Child //Works
+
+Naming Convention SP
+
+usp
+usp_
+sp
+
+Select ProductName, Price from Products Where Price > 50000
+
+.NET core 3.1
+FromSqlRaw - Works with "Select" statement only
+FromSqlRawInterpolated
+ExecuteSqlRaw - DML, USP
+ExecuteSqlRawInterpolated
