@@ -90,6 +90,33 @@ namespace Infosys.QuickKartDBFirst.DAL
             }
             return products;
         }
+
+        //DML Operation using EF Core
+        public bool AddNewCategory(string categoryName)
+        {
+            bool status = false;
+            try
+            {
+                //Object Initializer
+                //Categories cat = new Categories
+                //{
+                //    CategoryName = categoryName
+                //};
+
+                Categories cat = new Categories();
+                cat.CategoryName = categoryName;
+    
+                _dbContext.Categories.Add(cat);//Adding new row to categories
+                _dbContext.SaveChanges();//reflect the changes to the DB
+                status = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return status;
+        }
+
     }
 
 }

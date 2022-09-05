@@ -86,28 +86,51 @@ namespace Infosys.QuickKartDBFirst.ConsoleUI
 
             #region Filter Product By Pattern
 
-            Console.Write("Enter Pattern to search product name :");
-            string pattern = Console.ReadLine();
-            var products = repository.FilterProductByPattern(pattern);
+            //Console.Write("Enter Pattern to search product name :");
+            //string pattern = Console.ReadLine();
+            //var products = repository.FilterProductByPattern(pattern);
 
-            if (products.Count > 0)
+            //if (products.Count > 0)
+            //{
+            //    Console.WriteLine($"{"Product Id",-10}\t{"Product Name",-50}\t{"Category Id",-10}\t{"Price"}");
+            //    Console.WriteLine("---------------------------------------------------------------------------------------------");
+            //    foreach (var prd in products)
+            //    {
+            //        Console.WriteLine($"{prd.ProductId,-10}\t{prd.ProductName,-50}\t{prd.CategoryId,-10}\t{prd.Price}");
+            //    }
+            //}
+            //else
+            //{
+            //    Console.WriteLine("No Record found.");
+            //}
+
+            #endregion
+
+            #region Add New Category
+
+            try
             {
-                Console.WriteLine($"{"Product Id",-10}\t{"Product Name",-50}\t{"Category Id",-10}\t{"Price"}");
-                Console.WriteLine("---------------------------------------------------------------------------------------------");
-                foreach (var prd in products)
+                Console.Write("Enter a Category :");
+                string categoryName = Console.ReadLine();
+                var result = repository.AddNewCategory(categoryName);
+                if (result)
                 {
-                    Console.WriteLine($"{prd.ProductId,-10}\t{prd.ProductName,-50}\t{prd.CategoryId,-10}\t{prd.Price}");
-                }
+                    Console.WriteLine("New Category Created Successfully");
+                }              
             }
-            else
+            catch//(Exception)
             {
-                Console.WriteLine("No Record found.");
+                Console.WriteLine("Please enter different Category Name");
+            }
+            finally
+            {
+                repository.Dispose();
             }
 
             #endregion
 
             //Calling Dispose - always call this method at the end of the program
-            repository.Dispose();
+            //repository.Dispose();
         }
     }
 }
