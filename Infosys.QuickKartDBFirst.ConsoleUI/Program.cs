@@ -1,4 +1,5 @@
 ﻿using Infosys.QuickKartDBFirst.DAL;
+using Infosys.QuickKartDBFirst.DAL.Models;
 using System;
 using System.Collections.Generic;
 
@@ -108,25 +109,56 @@ namespace Infosys.QuickKartDBFirst.ConsoleUI
 
             #region Add New Category
 
+            //try
+            //{
+            //    Console.Write("Enter a Category :");
+            //    string categoryName = Console.ReadLine();
+            //    var result = repository.AddNewCategory(categoryName);
+            //    if (result)
+            //    {
+            //        Console.WriteLine("New Category Created Successfully");
+            //    }              
+            //}
+            //catch//(Exception)
+            //{
+            //    Console.WriteLine("Please enter different Category Name");
+            //}
+            //finally
+            //{
+            //    repository.Dispose();
+            //}
+
+            #endregion
+
+            #region Add New Product
+
             try
             {
-                Console.Write("Enter a Category :");
-                string categoryName = Console.ReadLine();
-                var result = repository.AddNewCategory(categoryName);
+                Products products = new Products
+                {
+                    ProductId = "P158",
+                    ProductName = "Dell Laptop",
+                    Price = 75800.89M,
+                    QuantityAvailable = 13,
+                    CategoryId = 3
+                };
+                var result = repository.AddNewProduct(products);
                 if (result)
                 {
-                    Console.WriteLine("New Category Created Successfully");
-                }              
+                    Console.WriteLine("Product Added Successfully");
+                }
             }
-            catch//(Exception)
+            catch (Exception ex)
             {
-                Console.WriteLine("Please enter different Category Name");
+                Console.WriteLine(ex.InnerException.Message);
             }
             finally
             {
-                repository.Dispose();
+                if (repository != null)
+                {
+                    repository.Dispose();
+                }
             }
-
             #endregion
 
             //Calling Dispose - always call this method at the end of the program

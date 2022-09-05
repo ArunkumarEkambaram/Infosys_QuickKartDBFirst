@@ -117,6 +117,24 @@ namespace Infosys.QuickKartDBFirst.DAL
             return status;
         }
 
+        //Add New Product
+        public bool AddNewProduct(Products product)
+        {
+            bool status = false;
+            try
+            {
+                _dbContext.Products.Add(product);
+                _dbContext.Entry(product).State = EntityState.Added;
+                _dbContext.SaveChanges();
+                status = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return status;
+        }
+
     }
 
 }
