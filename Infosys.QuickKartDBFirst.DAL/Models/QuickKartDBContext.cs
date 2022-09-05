@@ -20,9 +20,7 @@ namespace Infosys.QuickKartDBFirst.DAL.Models
         }
 
         public DbSet<CardDetails> CardDetails { get; set; }
-        public DbSet<Categories> Categories { get; set; }
-       // public virtual DbSet<NewTable> NewTable { get; set; }
-       // public virtual DbSet<ProductBackup> ProductBackup { get; set; }
+        public DbSet<Categories> Categories { get; set; }     
         public DbSet<Products> Products { get; set; }
         public DbSet<PurchaseDetails> PurchaseDetails { get; set; }
         public DbSet<Roles> Roles { get; set; }

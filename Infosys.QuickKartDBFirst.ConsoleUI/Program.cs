@@ -23,51 +23,53 @@ namespace Infosys.QuickKartDBFirst.ConsoleUI
 
         static void Main(string[] args)
         {
-            // var context = new QuickKartDBContext();
-            using (var context = new QuickKartDBContext())
+            #region Change Tracking
+
+            //// var context = new QuickKartDBContext();
+            //using (var context = new QuickKartDBContext())
+            //{
+            //    //var catergory = context.Categories.OrderBy(c => c.CategoryId).First();
+            //    //Console.WriteLine($"State :{context.Entry(catergory).State}");
+            //    //Console.WriteLine("------------------------------------");
+            //    //Categories c1 = new Categories
+            //    //{
+            //    //    CategoryName = "Baby"
+            //    //};
+            //    //Console.WriteLine($"State :{context.Entry(c1).State}");
+            //    //context.Categories.Add(c1);
+            //    //Console.WriteLine($"State :{context.Entry(c1).State}");
+            //    //Console.WriteLine("------------------------------------");
+            //    ////Update
+            //    //Console.WriteLine("Performing Update Operation");
+            //    //byte id = 1;
+            //    //var updCategory = context.Categories.Find(id);
+            //    //updCategory.CategoryName = "Baby & Toys";
+            //    //context.Categories.Update(updCategory);
+            //    //Console.WriteLine($"State :{context.Entry(updCategory).State}");
+            //    ////Delete
+            //    //Console.WriteLine("------------------------------------");
+            //    //Console.WriteLine("Performing Delete Operation");
+            //    //var delCategory = context.Categories.Find(id);
+            //    //context.Categories.Remove(delCategory);
+            //    //Console.WriteLine($"State :{context.Entry(delCategory).State}");
+
+            //    Console.WriteLine("------------------------------------");
+            //    //Calling Change Tracking
+            //    context.Categories.ToList();
+            //    Roles r1 = new Roles
+            //    {
+            //        RoleName = "Executive"
+            //    };
+            //    context.Roles.Add(r1);
+            //    var product = context.Products.Find("P101");
+            //    context.Products.Remove(product);
+            //    Program.ChangeTracking(context.ChangeTracker.Entries());
+            //}
+
+            #endregion
+
+            using (var repository = new QuickKartRepository())
             {
-                //var catergory = context.Categories.OrderBy(c => c.CategoryId).First();
-                //Console.WriteLine($"State :{context.Entry(catergory).State}");
-                //Console.WriteLine("------------------------------------");
-                //Categories c1 = new Categories
-                //{
-                //    CategoryName = "Baby"
-                //};
-                //Console.WriteLine($"State :{context.Entry(c1).State}");
-                //context.Categories.Add(c1);
-                //Console.WriteLine($"State :{context.Entry(c1).State}");
-                //Console.WriteLine("------------------------------------");
-                ////Update
-                //Console.WriteLine("Performing Update Operation");
-                //byte id = 1;
-                //var updCategory = context.Categories.Find(id);
-                //updCategory.CategoryName = "Baby & Toys";
-                //context.Categories.Update(updCategory);
-                //Console.WriteLine($"State :{context.Entry(updCategory).State}");
-                ////Delete
-                //Console.WriteLine("------------------------------------");
-                //Console.WriteLine("Performing Delete Operation");
-                //var delCategory = context.Categories.Find(id);
-                //context.Categories.Remove(delCategory);
-                //Console.WriteLine($"State :{context.Entry(delCategory).State}");
-
-                Console.WriteLine("------------------------------------");
-                //Calling Change Tracking
-                context.Categories.ToList();
-                Roles r1 = new Roles
-                {
-                    RoleName = "Executive"
-                };
-                context.Roles.Add(r1);
-                var product = context.Products.Find("P101");
-                context.Products.Remove(product);
-                Program.ChangeTracking(context.ChangeTracker.Entries());
-            }
-
-
-            using (QuickKartRepository repository = new QuickKartRepository())
-            {
-
                 #region Get All Categories
 
                 //var categories = repository.GetAllCategories();
@@ -280,7 +282,7 @@ namespace Infosys.QuickKartDBFirst.ConsoleUI
 
                 #region Delete Range of Products
 
-                //var result = repository.DeleteProductByRange("%paint%");
+                //var result = repository.DeleteProductByRange("BMW");
                 //if (result)
                 //{
                 //    Console.WriteLine("Delete Range of Product contains 'paint'");
@@ -291,8 +293,22 @@ namespace Infosys.QuickKartDBFirst.ConsoleUI
                 //}
 
                 #endregion
-            }
 
+                #region GetAllProductsUsingFromSQLRaw
+
+                byte id = 3;
+                var products = repository.GetAllProductsUsingFromSQLRaw(id);
+
+                Console.WriteLine($"{"Product Name",-40}\t{"Price",-10}\t{"Category Id"}");
+                Console.WriteLine("-----------------------------------------------------------------------");
+                foreach (var prd in products)
+                {
+                    Console.WriteLine($"{prd.ProductName,-40}\t{prd.Price,-10}\t{prd.CategoryId}");
+                }
+
+                #endregion
+
+            }
             //Calling Dispose - always call this method at the end of the program
             //repository.Dispose();
         }

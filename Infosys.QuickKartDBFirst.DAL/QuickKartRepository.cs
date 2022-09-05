@@ -1,4 +1,5 @@
 ﻿using Infosys.QuickKartDBFirst.DAL.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -251,10 +252,25 @@ namespace Infosys.QuickKartDBFirst.DAL
             {
                 throw ex;
             }
-            
+
             return status;
         }
 
+        //Invoking SQL statement and USP
+        public List<Products> GetAllProductsUsingFromSQLRaw(byte categoryId)
+        {
+            //FromSqlRaw = Works with "Select" statement only
+            SqlParameter sqlCategoryId = new SqlParameter("@CategoryId", categoryId);
+            return _dbContext.Products.FromSqlRaw("Select * from Products Where CategoryId=@CategoryId", sqlCategoryId)
+                                              .OrderBy(p => p.Price)
+                                              .ToList();
+
+            //FromSqlInterpolated
+            //return _dbContext.Products.FromSqlInterpolated($"Select * from Products Where CategoryId={categoryId}")
+            //                                 .OrderBy(p => p.Price)
+            //                                 .ToList();
+
+        }       
     }
 
 }
