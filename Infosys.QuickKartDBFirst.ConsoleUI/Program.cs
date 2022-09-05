@@ -117,7 +117,7 @@ namespace Infosys.QuickKartDBFirst.ConsoleUI
             //    if (result)
             //    {
             //        Console.WriteLine("New Category Created Successfully");
-            //    }              
+            //    }
             //}
             //catch//(Exception)
             //{
@@ -132,33 +132,93 @@ namespace Infosys.QuickKartDBFirst.ConsoleUI
 
             #region Add New Product
 
-            try
-            {
-                Products products = new Products
-                {
-                    ProductId = "P158",
-                    ProductName = "Dell Laptop",
-                    Price = 75800.89M,
-                    QuantityAvailable = 13,
-                    CategoryId = 3
-                };
-                var result = repository.AddNewProduct(products);
-                if (result)
-                {
-                    Console.WriteLine("Product Added Successfully");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.InnerException.Message);
-            }
-            finally
-            {
-                if (repository != null)
-                {
-                    repository.Dispose();
-                }
-            }
+            //try
+            //{
+            //    Products products = new Products
+            //    {
+            //        ProductId = "P158",
+            //        ProductName = "Dell Laptop",
+            //        Price = 75800.89M,
+            //        QuantityAvailable = 13,
+            //        CategoryId = 3
+            //    };
+            //    var result = repository.AddNewProduct(products);
+            //    if (result)
+            //    {
+            //        Console.WriteLine("Product Added Successfully");
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.InnerException.Message);
+            //}
+            //finally
+            //{
+            //    if (repository != null)
+            //    {
+            //        repository.Dispose();
+            //    }
+            //}
+            #endregion
+
+            #region Add Range of Products
+
+            //Products p1 = new Products
+            //{
+            //    ProductId = "P159",
+            //    ProductName = "Wall Clock",
+            //    Price = 1050,
+            //    QuantityAvailable = 120,
+            //    CategoryId = 5
+            //};
+
+            //Products p2 = new Products
+            //{
+            //    ProductId = "P160",
+            //    ProductName = "Table Fan",
+            //    Price = 2550,
+            //    QuantityAvailable = 12,
+            //    CategoryId = 5
+            //};
+
+            //var result = repository.AddProductUsingAddRange(p1, p2);
+            //if (result)
+            //{
+            //    Console.WriteLine("Products added successfully");
+            //}
+
+            #endregion
+
+            #region Update Product
+
+            //string productId = "P161";
+            //decimal price = 2850;
+            //int quantity = 100;
+            //var result = repository.UpdateProductByProductId(productId, price, quantity);
+            //if (result)
+            //{
+            //    Console.WriteLine("Product Updated Successfully");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Product Id doesn't exists");
+            //}
+
+            #endregion
+
+            #region Delete Category
+
+            //byte categoryId = 17;
+            //var result = repository.DeleteCategoryById(categoryId);
+            //if (result)
+            //{
+            //    Console.WriteLine("Category Deleted Successfully");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Invalid Category Id");
+            //}
+
             #endregion
 
             //Calling Dispose - always call this method at the end of the program

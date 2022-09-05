@@ -105,7 +105,7 @@ namespace Infosys.QuickKartDBFirst.DAL
 
                 Categories cat = new Categories();
                 cat.CategoryName = categoryName;
-    
+
                 _dbContext.Categories.Add(cat);//Adding new row to categories
                 _dbContext.SaveChanges();//reflect the changes to the DB
                 status = true;
@@ -127,6 +127,101 @@ namespace Infosys.QuickKartDBFirst.DAL
                 _dbContext.Entry(product).State = EntityState.Added;
                 _dbContext.SaveChanges();
                 status = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return status;
+        }
+
+        //Add new User
+        public bool RegisterUser(string userPassword, string gender, string emailId, DateTime dateOfBirth, string address)
+        {
+            bool status;
+            try
+            {
+                Users users = new Users
+                {
+                    EmailId = emailId,
+                    UserPassword = userPassword,
+                    Gender = gender,
+                    DateOfBirth = dateOfBirth,
+                    Address = address
+                };
+                _dbContext.Users.Add(users);
+                _dbContext.Entry(users).State = EntityState.Added;
+                _dbContext.SaveChanges();
+                status = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return status;
+        }
+
+        public bool AddProductUsingAddRange(params Products[] products)
+        {
+            bool status;
+            try
+            {
+                _dbContext.Products.AddRange(products);//Adding more than one product
+                _dbContext.SaveChanges();
+                status = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return status;
+        }
+
+        public bool UpdateProductByProductId(string productId, decimal price, int quantity)
+        {
+            bool status;
+            try
+            {
+                var productInDb = _dbContext.Products.Find(productId);
+                if (productInDb != null)
+                {
+                    productInDb.Price = price;
+                    productInDb.QuantityAvailable = quantity;
+                    _dbContext.Products.Update(productInDb);
+                    _dbContext.Entry(productInDb).State = EntityState.Modified;
+                    _dbContext.SaveChanges();
+                    status = true;
+                }
+                else
+                {
+                    status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return status;
+        }
+
+        //Delete Category By ID
+        public bool DeleteCategoryById(byte categoryId)
+        {
+            bool status;
+            try
+            {
+                var categoryInDb = _dbContext.Categories.Find(categoryId);
+                if (categoryInDb != null)
+                {
+                    _dbContext.Categories.Remove(categoryInDb);
+                    _dbContext.Entry(categoryInDb).State = EntityState.Deleted;
+                    _dbContext.SaveChanges();
+                    status = true;
+                }
+                else
+                {
+                    status = false;
+                }
             }
             catch (Exception ex)
             {
