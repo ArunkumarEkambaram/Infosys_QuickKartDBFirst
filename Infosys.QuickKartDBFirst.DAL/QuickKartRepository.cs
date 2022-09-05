@@ -230,6 +230,31 @@ namespace Infosys.QuickKartDBFirst.DAL
             return status;
         }
 
+        public bool DeleteProductByRange(string productName)
+        {
+            bool status;
+            try
+            {
+                var productsInDb = _dbContext.Products.Where(p => p.ProductName.Contains(productName));
+                if (productsInDb != null)
+                {
+                    _dbContext.Products.RemoveRange(productsInDb);
+                    int r = _dbContext.SaveChanges();
+                    status = true;
+                }
+                else
+                {
+                    status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+            return status;
+        }
+
     }
 
 }
