@@ -277,6 +277,35 @@ namespace Infosys.QuickKartDBFirst.DAL
             return _dbContext.Products.FromSqlRaw($"EXEC usp_GetProductByCategoryId {categoryId}")
                                       .ToList();
         }
+
+        //Invoke USP  - Peform DML Operation - ExecuteSqlRaw
+        public int AddCategoriesUsingUSP(string categoryName, out byte categoryId)
+        {
+            int result;
+            categoryId = 0;
+
+            try
+            {
+                //Output Parameter - Every Sql Server Parameter(@ParameterName) are mapped with SqlParameter object
+                SqlParameter prmCategoryId = new SqlParameter("@CategoryId", System.Data.SqlDbType.TinyInt);
+                prmCategoryId.Direction = System.Data.ParameterDirection.Output;
+                //Output Parameter
+                SqlParameter prmReturnValue = new SqlParameter("@ReturnValue", System.Data.SqlDbType.Int);
+                prmReturnValue.Direction = System.Data.ParameterDirection.Output;
+                //Input Parameter
+                SqlParameter prmCategoryName = new SqlParameter("@CategoryName", categoryName);
+
+                _dbContext.Database.ExecuteSqlRaw("EXEC @ReturnValue = usp_AddCategory @CategoryName, @CategoryId OUT", prmCategoryName, prmCategoryId, prmReturnValue);
+                result = Convert.ToInt32(prmReturnValue.Value);
+                categoryId = Convert.ToByte(prmCategoryId.Value);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
     }
 
 }

@@ -310,14 +310,40 @@ namespace Infosys.QuickKartDBFirst.ConsoleUI
 
                 #region Get Products using USP
 
-                byte id = 4;
-                var products = repository.GetProductsUsingUSP(id);
-                Console.WriteLine($"{"Product Name",-50}\t{"Price",-10}\t{"Category Id"}");
-                Console.WriteLine("-----------------------------------------------------------------------");
-                foreach (var prd in products)
+                //byte id = 4;
+                //var products = repository.GetProductsUsingUSP(id);
+                //Console.WriteLine($"{"Product Name",-50}\t{"Price",-10}\t{"Category Id"}");
+                //Console.WriteLine("-----------------------------------------------------------------------");
+                //foreach (var prd in products)
+                //{
+                //    Console.WriteLine($"{prd.ProductName,-50}\t{prd.Price,-10}\t{prd.CategoryId}");
+                //}
+
+                #endregion
+
+                #region AddCategoriesUsingUSP
+
+                byte categoryId;
+                string categoryName = "Books";
+
+                var result = repository.AddCategoriesUsingUSP(categoryName, out categoryId);
+                if (result == -1)
                 {
-                    Console.WriteLine($"{prd.ProductName,-50}\t{prd.Price,-10}\t{prd.CategoryId}");
+                    Console.WriteLine("Category ID cannot be null");
                 }
+                else if (result == -2)
+                {
+                    Console.WriteLine("Category Name already exists. Please use different name");
+                }
+                else if (result == -99)
+                {
+                    Console.WriteLine("Server error. Please try later");
+                }
+                else
+                {
+                    Console.WriteLine($"New Category Id :{categoryId}, created successfully");
+                }
+
 
                 #endregion
 

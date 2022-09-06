@@ -1,0 +1,50 @@
+﻿In order invoke USP  or SQL Statement
+1) FromSqlRaw() - Select Statment / USP using Select
+dbcontext.tableproperty.FromSqlRaw()
+
+2) ExecuteSqlRaw() - DML Operation / USP using DML - Returns No of rows affected (int)
+dbcontext.Database.ExecuteSqlRaw()
+
+--USP
+Create Proc usp_GetProductByCategoryId(@CategoryId tinyint)
+as
+if(exists(Select 'a' from Products Where CategoryId=@CategoryId))
+begin
+	Select * from Products Where CategoryId=@CategoryId
+end
+else
+Raiserror('Category ID doesn''t exists',16,1)
+
+--Modified AddCategory USP
+alter PROCEDURE usp_AddCategory
+(
+	@CategoryName VARCHAR(20),
+    @CategoryId TINYINT OUT
+)
+AS
+BEGIN
+	Declare @ReturnValue int
+	SET @CategoryId = 0
+	SET @ReturnValue = 0
+	BEGIN TRY
+		IF (@CategoryName IS NULL)
+		begin
+			SET @ReturnValue = -1
+			Return @ReturnValue
+		end
+		IF EXISTS(SELECT 'a' FROM Categories WHERE CategoryName=@CategoryName)
+		begin
+			SET @ReturnValue = -2
+			Return @ReturnValue
+		end	
+		INSERT INTO Categories VALUES (@CategoryName)
+		SET @CategoryId = IDENT_CURRENT('Categories')		
+		SET @ReturnValue = 1
+		Return @ReturnValue		
+	END TRY
+	BEGIN CATCH
+		SET @CategoryId = 0		
+		SET @ReturnValue = -99
+		Return @ReturnValue		
+	END CATCH
+END
