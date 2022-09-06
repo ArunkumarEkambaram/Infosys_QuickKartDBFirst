@@ -328,7 +328,12 @@ namespace Infosys.QuickKartDBFirst.DAL
             return _dbContext.Products.Select(p => QuickKartDBContext.ufn_GenerateNewProductId()).FirstOrDefault();
         }
 
-      //  public List<Products> 
+        public List<ProductWithTax> GetProductWithPriceAndTax()
+        {
+            return _dbContext.ProductWithTax
+                .FromSqlRaw("Select ProductName, Price, dbo.ufn_CalculateTax(Price) as 'TaxAmount' from Products order by Price desc")
+                .ToList();
+        }
 
     }
 

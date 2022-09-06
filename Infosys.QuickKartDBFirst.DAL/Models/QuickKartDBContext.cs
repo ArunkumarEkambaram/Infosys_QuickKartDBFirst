@@ -28,6 +28,8 @@ namespace Infosys.QuickKartDBFirst.DAL.Models
 
         public DbSet<ProductAndCategory> ProductAndCategaories { get; set; }
 
+        public DbSet<ProductWithTax> ProductWithTax { get; set; }
+
         //Static Function - Map UDF Scalar Function
         //[DbFunction("ufn_GenerateNewProductId", "dbo")]
         //public static string GenerateNewProductId()
@@ -39,13 +41,7 @@ namespace Infosys.QuickKartDBFirst.DAL.Models
         {
             return null;
         }
-
-        [DbFunction("ufn_CalculateTax", "dbo")]
-        public static decimal CalculateTax(decimal price)
-        {
-            return 0;
-        }
-
+       
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -64,6 +60,8 @@ namespace Infosys.QuickKartDBFirst.DAL.Models
             modelBuilder.HasDefaultSchema("dbo")
                         .HasDbFunction(() => QuickKartDBContext.ufn_GenerateNewProductId())
                         .HasName("ufn_GenerateNewProductId");
+
+            modelBuilder.Entity<ProductWithTax>().HasNoKey();//For Scalar Function
 
             modelBuilder.Entity<CardDetails>(entity =>
             {

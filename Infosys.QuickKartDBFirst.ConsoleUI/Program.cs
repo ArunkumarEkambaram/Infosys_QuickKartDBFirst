@@ -359,9 +359,25 @@ namespace Infosys.QuickKartDBFirst.ConsoleUI
 
                 #endregion
 
-                var id = repository.GetNewProductId();
-                Console.WriteLine($"New Product Id :{id}");
+                #region Scalar Function - New Product ID
 
+                //var id = repository.GetNewProductId();
+                //Console.WriteLine($"New Product Id :{id}");
+
+                #endregion
+
+                #region Scalar Function - With Tax
+
+                var products = repository.GetProductWithPriceAndTax();
+
+                Console.WriteLine($"{"Product Name",-50}\t{"Price",-10}\t{"Tax Amount"}");
+                Console.WriteLine("----------------------------------------------------------------------------------------");
+                foreach (var item in products)
+                {
+                    Console.WriteLine($"{item.ProductName,-50}\t{item.Price,-10}\t{item.TaxAmount}");
+                }
+
+                #endregion
             }
             //Calling Dispose - always call this method at the end of the program
             //repository.Dispose();
