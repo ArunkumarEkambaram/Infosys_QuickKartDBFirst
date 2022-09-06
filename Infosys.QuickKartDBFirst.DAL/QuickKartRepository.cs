@@ -260,9 +260,8 @@ namespace Infosys.QuickKartDBFirst.DAL
         public List<Products> GetAllProductsUsingFromSQLRaw(byte categoryId)
         {
             //FromSqlRaw = Works with "Select" statement only
-            SqlParameter sqlCategoryId = new SqlParameter("@CategoryId", categoryId);
-            return _dbContext.Products.FromSqlRaw("Select ProductName, Price, CategoryName, QuantityAvailable from Products a join Categories b on a.CategoryId = b.CategoryId " +
-                                                  "Where b.CategoryId = @CategoryId", sqlCategoryId)
+            SqlParameter prmCategoryId = new SqlParameter("@CategoryId", categoryId);
+            return _dbContext.Products.FromSqlRaw("Select * from Products Where CategoryId=@CategoryId", prmCategoryId)
                                               .OrderBy(p => p.Price)
                                               .ToList();
 
@@ -271,7 +270,13 @@ namespace Infosys.QuickKartDBFirst.DAL
             //                                 .OrderBy(p => p.Price)
             //                                 .ToList();
 
-        }       
+        }
+
+        public List<Products> GetProductsUsingUSP(byte categoryId)
+        {
+            return _dbContext.Products.FromSqlRaw($"EXEC usp_GetProductByCategoryId {categoryId}")
+                                      .ToList();
+        }
     }
 
 }

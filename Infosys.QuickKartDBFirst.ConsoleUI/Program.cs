@@ -296,14 +296,27 @@ namespace Infosys.QuickKartDBFirst.ConsoleUI
 
                 #region GetAllProductsUsingFromSQLRaw
 
-                byte id = 3;
-                var products = repository.GetAllProductsUsingFromSQLRaw(id);
+                //byte id = 3;
+                //var products = repository.GetAllProductsUsingFromSQLRaw(id);
 
-                Console.WriteLine($"{"Product Name",-40}\t{"Price",-10}\t{"Category Id"}");
+                //Console.WriteLine($"{"Product Name",-40}\t{"Price",-10}\t{"Category Id"}");
+                //Console.WriteLine("-----------------------------------------------------------------------");
+                //foreach (var prd in products)
+                //{
+                //    Console.WriteLine($"{prd.ProductName,-40}\t{prd.Price,-10}\t{prd.CategoryId}");
+                //}
+
+                #endregion
+
+                #region Get Products using USP
+
+                byte id = 4;
+                var products = repository.GetProductsUsingUSP(id);
+                Console.WriteLine($"{"Product Name",-50}\t{"Price",-10}\t{"Category Id"}");
                 Console.WriteLine("-----------------------------------------------------------------------");
                 foreach (var prd in products)
                 {
-                    Console.WriteLine($"{prd.ProductName,-40}\t{prd.Price,-10}\t{prd.CategoryId}");
+                    Console.WriteLine($"{prd.ProductName,-50}\t{prd.Price,-10}\t{prd.CategoryId}");
                 }
 
                 #endregion
