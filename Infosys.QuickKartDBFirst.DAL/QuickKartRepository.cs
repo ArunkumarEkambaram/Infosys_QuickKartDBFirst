@@ -299,13 +299,28 @@ namespace Infosys.QuickKartDBFirst.DAL
                 result = Convert.ToInt32(prmReturnValue.Value);
                 categoryId = Convert.ToByte(prmCategoryId.Value);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
             return result;
         }
 
+        //Invoking UDF - Table Valued Function
+        public List<ProductAndCategory> GetAllProductAndCategorieTVF(int categoryId)
+        {
+            List<ProductAndCategory> products = null;
+            try
+            {
+                SqlParameter PrmCategoryId = new SqlParameter("@CategoryId", categoryId);
+                products = _dbContext.ProductAndCategaories.FromSqlRaw("Select * from ufn_GetAllProductDetails(@CategoryId)", PrmCategoryId).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return products;
+        }
     }
 
 }

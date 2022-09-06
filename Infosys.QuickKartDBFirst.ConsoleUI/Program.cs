@@ -323,27 +323,39 @@ namespace Infosys.QuickKartDBFirst.ConsoleUI
 
                 #region AddCategoriesUsingUSP
 
-                byte categoryId;
-                string categoryName = "Books";
+                //byte categoryId;
+                //string categoryName = "Books";
 
-                var result = repository.AddCategoriesUsingUSP(categoryName, out categoryId);
-                if (result == -1)
-                {
-                    Console.WriteLine("Category ID cannot be null");
-                }
-                else if (result == -2)
-                {
-                    Console.WriteLine("Category Name already exists. Please use different name");
-                }
-                else if (result == -99)
-                {
-                    Console.WriteLine("Server error. Please try later");
-                }
-                else
-                {
-                    Console.WriteLine($"New Category Id :{categoryId}, created successfully");
-                }
+                //var result = repository.AddCategoriesUsingUSP(categoryName, out categoryId);
+                //if (result == -1)
+                //{
+                //    Console.WriteLine("Category ID cannot be null");
+                //}
+                //else if (result == -2)
+                //{
+                //    Console.WriteLine("Category Name already exists. Please use different name");
+                //}
+                //else if (result == -99)
+                //{
+                //    Console.WriteLine("Server error. Please try later");
+                //}
+                //else
+                //{
+                //    Console.WriteLine($"New Category Id :{categoryId}, created successfully");
+                //}
 
+
+                #endregion
+
+                #region UDF - Table Valued Function
+
+                var productCategories = repository.GetAllProductAndCategorieTVF(2);
+                Console.WriteLine($"{"Product Id",-10}\t{"Product Name",-50}\t{"Price",-10}\t{"Category Name"}");
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                foreach (var item in productCategories)
+                {
+                    Console.WriteLine($"{item.ProductId,-10}\t{item.ProductName,-50}\t{item.Price,-10}\t{item.CategoryName}");
+                }
 
                 #endregion
 

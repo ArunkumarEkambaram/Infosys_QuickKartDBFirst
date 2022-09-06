@@ -26,6 +26,8 @@ namespace Infosys.QuickKartDBFirst.DAL.Models
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Users> Users { get; set; }
 
+        public DbSet<ProductAndCategory> ProductAndCategaories { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -36,6 +38,12 @@ namespace Infosys.QuickKartDBFirst.DAL.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Creating No Primary Key on ProductAndCategory Class
+            //Fluent API
+            //modelBuilder.Entity<ProductAndCategory>()
+            //            .HasNoKey();
+
+
             modelBuilder.Entity<CardDetails>(entity =>
             {
                 entity.HasKey(e => e.CardNumber)

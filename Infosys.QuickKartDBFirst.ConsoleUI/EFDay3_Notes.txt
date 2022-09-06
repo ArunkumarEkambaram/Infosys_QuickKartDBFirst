@@ -48,3 +48,25 @@ BEGIN
 		Return @ReturnValue		
 	END CATCH
 END
+
+--Below code runs only in SQL Server
+Declare @Name varchar(50)
+Declare @Id tinyint
+Declare @ReturnValue int
+SET @Name='Books'
+EXEC @ReturnValue = usp_AddCategory @Name, @Id OUT
+if(@ReturnValue = -1)
+	Print 'CategoryName cannot be null'
+else if(@ReturnValue = -2)
+	Print 'Category already exist'
+else
+	Select @Id
+--End of SQL Server Code
+
+In Order to access UDF which returns more than one table columns,
+1) Create similar class with properties in Models folder
+2) Create a Table Property in DbContext Class 
+public DbSet<ProductAndCategaory> ProductAndCategaories { get; set; }
+
+Data Annotation - Compiler Instruction
+Fluent API
