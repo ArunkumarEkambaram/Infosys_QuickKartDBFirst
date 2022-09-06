@@ -321,6 +321,15 @@ namespace Infosys.QuickKartDBFirst.DAL
             }
             return products;
         }
+
+        //Invoking Scalar Function
+        public string GetNewProductId()
+        {
+            return _dbContext.Products.Select(p => QuickKartDBContext.ufn_GenerateNewProductId()).FirstOrDefault();
+        }
+
+      //  public List<Products> 
+
     }
 
 }

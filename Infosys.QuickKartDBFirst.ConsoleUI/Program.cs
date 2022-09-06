@@ -349,15 +349,18 @@ namespace Infosys.QuickKartDBFirst.ConsoleUI
 
                 #region UDF - Table Valued Function
 
-                var productCategories = repository.GetAllProductAndCategorieTVF(2);
-                Console.WriteLine($"{"Product Id",-10}\t{"Product Name",-50}\t{"Price",-10}\t{"Category Name"}");
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------");
-                foreach (var item in productCategories)
-                {
-                    Console.WriteLine($"{item.ProductId,-10}\t{item.ProductName,-50}\t{item.Price,-10}\t{item.CategoryName}");
-                }
+                //var productCategories = repository.GetAllProductAndCategorieTVF(2);
+                //Console.WriteLine($"{"Product Id",-10}\t{"Product Name",-50}\t{"Price",-10}\t{"Category Name"}");
+                //Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                //foreach (var item in productCategories)
+                //{
+                //    Console.WriteLine($"{item.ProductId,-10}\t{item.ProductName,-50}\t{item.Price,-10}\t{item.CategoryName}");
+                //}
 
                 #endregion
+
+                var id = repository.GetNewProductId();
+                Console.WriteLine($"New Product Id :{id}");
 
             }
             //Calling Dispose - always call this method at the end of the program
